@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		527171771C0144820050C412 /* mian library.png in Resources */ = {isa = PBXBuildFile; fileRef = 527171751C0144820050C412 /* mian library.png */; };
 		5271717C1C0149AB0050C412 /* allison.png in Resources */ = {isa = PBXBuildFile; fileRef = 5271717B1C0149AB0050C412 /* allison.png */; };
+		52CDB93B1C01A48500875262 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CDB93A1C01A48500875262 /* pause.png */; };
 		779A0AEE1C00F63A00C3039D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779A0AED1C00F63A00C3039D /* Bolts.framework */; };
 		779A0AF01C00F64100C3039D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779A0AEF1C00F64100C3039D /* Parse.framework */; };
 		779A0AF21C00F64C00C3039D /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779A0AF11C00F64C00C3039D /* EstimoteSDK.framework */; };
@@ -44,6 +45,7 @@
 		5271716A1C0031460050C412 /* SwiftMaps-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftMaps-Bridging-Header.h"; sourceTree = "<group>"; };
 		527171751C0144820050C412 /* mian library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mian library.png"; sourceTree = "<group>"; };
 		5271717B1C0149AB0050C412 /* allison.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allison.png; sourceTree = "<group>"; };
+		52CDB93A1C01A48500875262 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		55DF3403443C5E60252B3266 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		779A0AED1C00F63A00C3039D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		779A0AEF1C00F64100C3039D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				779A0B591C016F2B00C3039D /* allison-2.png */,
 				779A0B5A1C016F2B00C3039D /* kellogg.png */,
 				779A0B5B1C016F2B00C3039D /* mian library-2.png */,
+				52CDB93A1C01A48500875262 /* pause.png */,
 				779A0B5C1C016F2B00C3039D /* norris (2).png */,
 				527171751C0144820050C412 /* mian library.png */,
 				5271717B1C0149AB0050C412 /* allison.png */,
@@ -252,6 +255,7 @@
 			files = (
 				AA91B8FB1A8AD9A500553B3B /* Main.storyboard in Resources */,
 				779A0B621C016F9A00C3039D /* tech.png in Resources */,
+				52CDB93B1C01A48500875262 /* pause.png in Resources */,
 				779A0B5D1C016F2B00C3039D /* allison-2.png in Resources */,
 				779A0B0E1C010B4C00C3039D /* play.jpg in Resources */,
 				779A0B641C017DEF00C3039D /* Images.xcassets in Resources */,

@@ -20,17 +20,54 @@ import Parse
 
 
 class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaconManagerDelegate{
-
     
+    
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var recordView: UIView!
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
     let beaconManager = ESTBeaconManager()
     let beaconRegion = CLBeaconRegion(
         proximityUUID: NSUUID(UUIDString: "CF1A5302-EEBB-5C4F-AA18-851A36494C3D")!,
         identifier: "ranged region")
+    var beacons : AnyObject = []
+    var timer = NSTimer()
+    var popover: UIPopoverController? = nil
+    
+    @IBOutlet var shareStory: UIButton!
+    
+    @IBAction func shareStory(sender: AnyObject) {
+        
+        let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("RecordBoard"))! as UIViewController
+        
 
+        popoverContent.modalPresentationStyle = .Popover
+        //var popover = popoverContent.popoverPresentationController
+        
+        if let popover = popoverContent.popoverPresentationController {
+            
+            let viewForSource = sender as! UIView
+            popover.sourceView = viewForSource
+            
+            // the position of the popover where it's showed
+            popover.sourceRect = viewForSource.bounds
+            
+            // the size you want to display
+            popoverContent.preferredContentSize = CGSizeMake(200,500)
+            //popover.delegate = self
+        }
+        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+
+    
     let placesByBeacons = [
         "538:38376": [
             "Norris": 50, // read as: it's 50 meters from
@@ -58,6 +95,19 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         }
         return []
     }
+    func updateView(note: NSNotification!){
+        beacons = note.object!
+        print("beacons:")
+        print(beacons)
+    }
+    func updateCounter() {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        print ("it is 5 seconds dude")
+        beacons = delegate.beacons
+        
+        print(beacons)
+    }
+
     func beaconManager(manager: AnyObject!,  beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
             if let nearestBeacon = beacons.first as? CLBeacon {
@@ -71,13 +121,25 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bottomView.hidden = true
+//        recordView.hidden = true
+     
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView", name: "updateBeaconTableView", object: nil)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let inRange = delegate.inNorris
+        let inNorris = delegate.inNorris
+        beacons = delegate.beacons
+        
+        print(beacons)
         
         print ("are you in range??")
         print(inNorris)
+
         
+        let fontSize = self.topLabel.font.pointSize;
+        self.topLabel.font = UIFont(name: "Coolvetica", size: fontSize)
         
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
@@ -133,6 +195,54 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.beaconManager.startRangingBeaconsInRegion(self.beaconRegion)
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let inNorris = delegate.inNorris
+
+        if (inNorris){
+            topLabel.text = "Norris Student Center"
+        }
+        let inTech = false
+        let inAllison = false
+        let inKellogg = false
+        let inLibrary = false
+        if(inNorris){
+            bottomView.hidden = false
+        } else {
+            bottomView.hidden = true
+        }
+        if(inAllison || inKellogg || inTech || inLibrary || inNorris){
+            
+            if (inAllison) {
+                enterRegion.hidden = false
+                title.text = "Allison Residential Hall"
+                content.text = "Allsion res hall is considered one of the best on campus. It houses 300+ students and also includes a dinning hall. From burgers to pasta to ethnic food, there’s a different option every day. Also features a kosher and vegan bar."
+            }
+            if(inKellogg) {
+                enterRegion.hidden = false
+                title.text = "Kellogg School of Management"
+                content.text = "The Kellogg building is the headquarters of the Kellogg School of Business. Many business or econ classes are offered there, along with a lot of graduate classes."
+            }
+            if(inTech){
+                enterRegion.hidden = false
+                title.text = "Technological Institute"
+                content.text = "Tech is home to many science and engineering classes. Some people even turn classrooms into study rooms when they’re not being used."
+            }
+            if(inLibrary){
+                enterRegion.hidden = false
+                title.text = "University Library"
+                content.text = "The University Library is the largest library on campus, and a great quiet spot to study. You can often find students passed out in the study carrels at 3AM during finals week."
+            }
+            
+            
+            if(inNorris){
+                enterRegion.hidden = false
+                title.text = "Norris"
+                content.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
+            }
+        } else {
+            enterRegion.hidden = true
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
