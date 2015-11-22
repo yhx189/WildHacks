@@ -15,6 +15,7 @@
 import UIKit
 import GoogleMaps
 import Parse
+import AVFoundation
 
 
 
@@ -24,8 +25,10 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
+   
+    
+    
     @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var recordView: UIView!
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
     let beaconManager = ESTBeaconManager()
@@ -35,8 +38,28 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     var beacons : AnyObject = []
     var timer = NSTimer()
     var popover: UIPopoverController? = nil
-    
+    var stopped = false
+    @IBOutlet var stopButton: UIButton!
+    @IBAction func stopAudio(sender: AnyObject) {
+        
+        if stopped == false{
+            player.pause()
+            stopButton.setImage(UIImage(named: "restart.png"), forState: UIControlState.Normal)
+            stopped = true
+        } else{
+            player.play()
+            stopButton.setImage(UIImage(named: "pause.png"), forState: UIControlState.Normal)
+            stopped = false
+        }
+        
+    }
+    //@IBOutlet weak var enterRegion: UIView!
     @IBOutlet var shareStory: UIButton!
+    var player :AVPlayer!
+  
+    //@IBOutlet weak var thisTitle: UILabel!
+    //@IBOutlet weak var content: UILabel!
+   
     
     @IBAction func shareStory(sender: AnyObject) {
         
@@ -46,18 +69,18 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         popoverContent.modalPresentationStyle = .Popover
         //var popover = popoverContent.popoverPresentationController
         
-        if let popover = popoverContent.popoverPresentationController {
+        let popover = popoverContent.popoverPresentationController
             
             let viewForSource = sender as! UIView
-            popover.sourceView = viewForSource
+            popover!.sourceView = viewForSource
             
             // the position of the popover where it's showed
-            popover.sourceRect = viewForSource.bounds
+            popover!.sourceRect = viewForSource.bounds
             
             // the size you want to display
             popoverContent.preferredContentSize = CGSizeMake(200,500)
             //popover.delegate = self
-        }
+        
         
         self.presentViewController(popoverContent, animated: true, completion: nil)
 
@@ -100,13 +123,43 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         print("beacons:")
         print(beacons)
     }
+    
     func updateCounter() {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         print ("it is 5 seconds dude")
         beacons = delegate.beacons
         
         print(beacons)
+        print ("it is 5 seconds dude")
+        let query = PFQuery(className: "Buyers")
+        //query.selectKeys(["Name"])
+        query.whereKey("Name", equalTo:"Norris")
+        var objects :[PFObject] = []
+        var selected :String!
+        do{
+            objects = try query.findObjects() as [PFObject]
+            let randomNumber = arc4random_uniform(UInt32(objects.count))
+            let another = objects[Int(randomNumber)] as PFObject?
+            print(randomNumber)
+            
+            let record = another!["records"] as! PFFile
+            //print(record.url)
+            selected = record.url
+            print("selected:")
+            print(selected)
+            let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
+            player = AVPlayer(playerItem:playerItem)
+            //player.rate = 1.0;
+            player.volume = 1.0
+            player.play()
+            
+            
+        }catch{
+            print(error)
+        }
+        
     }
+    
 
     func beaconManager(manager: AnyObject!,  beacons: [AnyObject]!,
         inRegion region: CLBeaconRegion!) {
@@ -123,10 +176,43 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         super.viewDidLoad()
         bottomView.hidden = true
 //        recordView.hidden = true
-     
+        //enterRegion.hidden = true
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView", name: "updateBeaconTableView", object: nil)
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+      
+        
+        let query = PFQuery(className: "Buyers")
+        //query.selectKeys(["Name"])
+        query.whereKey("Name", equalTo:"Norris")
+        var objects :[PFObject] = []
+        var selected :String!
+        do{
+            objects = try query.findObjects() as [PFObject]
+            let randomNumber = arc4random_uniform(UInt32(objects.count))
+            let another = objects[Int(randomNumber)] as PFObject?
+            print(randomNumber)
+            
+            let record = another!["records"] as! PFFile
+            //print(record.url)
+            selected = record.url
+            
+            //selected = "http://files.parsetfss.com/292b6f11-5fee-4be7-b317-16fd494dfa3d/tfss-ccc3a843-967b-4773-b92e-1cf2e8f3c1c6-testfile.wav"
+            print("selected:")
+            print(selected)
+            let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
+            player = AVPlayer(playerItem:playerItem)
+            //player.rate = 1.0;
+            player.volume = 1.0
+            player.play()
+            
+            
+        }catch{
+            print(error)
+        }
+        
+
+        
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let inNorris = delegate.inNorris
@@ -202,47 +288,49 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         if (inNorris){
             topLabel.text = "Norris Student Center"
         }
-        let inTech = false
-        let inAllison = false
-        let inKellogg = false
-        let inLibrary = false
+        //let inTech = false
+        //let inAllison = false
+        //let inKellogg = false
+        //let inLibrary = false
         if(inNorris){
             bottomView.hidden = false
         } else {
             bottomView.hidden = true
         }
+        /*
         if(inAllison || inKellogg || inTech || inLibrary || inNorris){
             
             if (inAllison) {
                 enterRegion.hidden = false
-                title.text = "Allison Residential Hall"
+                thisTitle.text = "Allison Residential Hall"
                 content.text = "Allsion res hall is considered one of the best on campus. It houses 300+ students and also includes a dinning hall. From burgers to pasta to ethnic food, there’s a different option every day. Also features a kosher and vegan bar."
             }
             if(inKellogg) {
                 enterRegion.hidden = false
-                title.text = "Kellogg School of Management"
+                thisTitle.text = "Kellogg School of Management"
                 content.text = "The Kellogg building is the headquarters of the Kellogg School of Business. Many business or econ classes are offered there, along with a lot of graduate classes."
             }
             if(inTech){
                 enterRegion.hidden = false
-                title.text = "Technological Institute"
+                thisTitle.text = "Technological Institute"
                 content.text = "Tech is home to many science and engineering classes. Some people even turn classrooms into study rooms when they’re not being used."
             }
             if(inLibrary){
                 enterRegion.hidden = false
-                title.text = "University Library"
+                thisTitle.text = "University Library"
                 content.text = "The University Library is the largest library on campus, and a great quiet spot to study. You can often find students passed out in the study carrels at 3AM during finals week."
             }
             
             
             if(inNorris){
                 enterRegion.hidden = false
-                title.text = "Norris"
+                thisTitle.text = "Norris"
                 content.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
             }
         } else {
             enterRegion.hidden = true
         }
+*/
     }
     
     override func viewDidDisappear(animated: Bool) {

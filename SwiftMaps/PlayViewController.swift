@@ -21,7 +21,7 @@ class PlayViewController: UIViewController , ESTBeaconManagerDelegate,AVAudioPla
     @IBOutlet var distance: UILabel!
     var allRecords: [String] = []
     var audioPlayer: AVAudioPlayer?
-    var player :AVPlayer!
+    
     var timer = NSTimer()
     var counter = 0
     
@@ -63,73 +63,11 @@ class PlayViewController: UIViewController , ESTBeaconManagerDelegate,AVAudioPla
             print(places) // TODO: remove after implementing the UI
         }
     }
-    func updateCounter() {
-  
-        print ("it is 5 seconds dude")
-        let query = PFQuery(className: "Buyers")
-        //query.selectKeys(["Name"])
-        query.whereKey("Name", equalTo:"Norris")
-        var objects :[PFObject] = []
-        var selected :String!
-        do{
-            objects = try query.findObjects() as [PFObject]
-            let randomNumber = arc4random_uniform(UInt32(objects.count))
-            let another = objects[Int(randomNumber)] as PFObject?
-            print(randomNumber)
-            
-            let record = another!["records"] as! PFFile
-            //print(record.url)
-            selected = record.url
-            print("selected:")
-            print(selected)
-            let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
-            player = AVPlayer(playerItem:playerItem)
-            //player.rate = 1.0;
-            player.volume = 1.0
-            player.play()
-            
-            
-        }catch{
-            print(error)
-        }
-
-    }
-
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
         
-        let query = PFQuery(className: "Buyers")
-        //query.selectKeys(["Name"])
-        query.whereKey("Name", equalTo:"Norris")
-        var objects :[PFObject] = []
-        var selected :String!
-        do{
-            objects = try query.findObjects() as [PFObject]
-            let randomNumber = arc4random_uniform(UInt32(objects.count))
-            let another = objects[Int(randomNumber)] as PFObject?
-            print(randomNumber)
-            
-            let record = another!["records"] as! PFFile
-            //print(record.url)
-            selected = record.url
-            
-            //selected = "http://files.parsetfss.com/292b6f11-5fee-4be7-b317-16fd494dfa3d/tfss-ccc3a843-967b-4773-b92e-1cf2e8f3c1c6-testfile.wav"
-            print("selected:")
-            print(selected)
-            let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
-            player = AVPlayer(playerItem:playerItem)
-            //player.rate = 1.0;
-            player.volume = 1.0
-            player.play()
-            
-            
-        }catch{
-            print(error)
-        }
-
         self.beaconManager.delegate = self
         // 4. We need to request this authorization for every beacon manager
         self.beaconManager.requestAlwaysAuthorization()

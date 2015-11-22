@@ -3,8 +3,6 @@ import GoogleMaps
 import Parse
 import AVFoundation
 
-
-
 class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate, ESTBeaconManagerDelegate {
     let beaconManager = ESTBeaconManager()
     var audioPlayer: AVAudioPlayer?
@@ -35,21 +33,23 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
             
             
             audioRecorder?.stop()
-            
-            
-            
-            let alert = UIAlertController(title: "Alert", message: "You're finished your message, confirm drop?", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction!) -> Void in
-                
+            let alert = UIAlertController(title: "Done!", message: "Give your post a name:", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+                // textField.placeholder = "Enter story name"
+                textField.text = "Enter story name"
+            })
+            alert.addAction(UIAlertAction(title: "Post", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction!) -> Void in
                 let dataToUpload : NSData = NSData(contentsOfURL: (self.audioRecorder?.url)!)!
-                let soundFile = PFFile(name: "audio.wav", data: dataToUpload)
+                let textField = alert.textFields![0] as UITextField
+                let soundFile = PFFile(name: "\(textField.text)", data: dataToUpload)
+                
                 let buyers = PFObject(className: "Buyers")
                 buyers["Name"] = "Norris"
                 buyers["records"] = soundFile
                 buyers.saveInBackground()
             }))
             
-            alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
             
@@ -63,6 +63,7 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
         
         
     }
+    
     func uploadParse(){
         let dataToUpload : NSData = NSData(contentsOfURL: (audioRecorder?.url)!)!
         
@@ -84,7 +85,7 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
         imagePlay = UIImage(named:"play.jpg")
         recordButton.setImage(imagePlay, forState: .Normal)
         
-        let soundFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("sound.wav")
+        let soundFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("sound.cat")
         //let docsDir = dirPaths[0]  //as! String
         //let soundFilePath =
         //  docsDir.URLByAppendingPathComponent("sound.caf")

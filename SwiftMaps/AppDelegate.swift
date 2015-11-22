@@ -134,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             var text : String = ""
             
             if !enteredRegion {
-                text = "You are out of the range of"
+                text = "You are out of the range of Norris"
             }
             Notifications.display(text)
             
