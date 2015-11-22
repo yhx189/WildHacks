@@ -32,7 +32,8 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     var inKellogg = false
     var inTech  = false
     var inLibrary = false
-    
+    var cnt :Int = 0
+    var counter = 0
     @IBOutlet var enterRegion: UIView!
     @IBOutlet var enterRegionContent: UILabel!
     //@IBOutlet var thisTitle: UILabel!
@@ -44,7 +45,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         
         if stopped == false{
             player.rate = 0.0
-            stopButton.setImage(UIImage(named: "restart.png"), forState: UIControlState.Normal)
+            stopButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
             stopped = true
         } else{
             player.rate = 1.0
@@ -56,7 +57,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     //@IBOutlet weak var enterRegion: UIView!
     @IBOutlet var shareStory: UIButton!
     var player :AVPlayer!
-    
+    var queuePlayer :AVQueuePlayer!
     //@IBOutlet weak var thisTitle: UILabel!
     //@IBOutlet weak var content: UILabel!
     
@@ -139,10 +140,12 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     */
     func updateCounter() {
+        
         print ("it is 5 seconds dude")
-        
-        
-        let query = PFQuery(className: "Buyers")
+        counter++
+        if counter == 5{
+            timer.invalidate()
+            let query = PFQuery(className: "Buyers")
         var location :String = ""
         if (inNorris){
             location = "Norris"
@@ -159,11 +162,16 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         if (inKellogg){
             location = "Kellogg"
         }
+        if(!inNorris && !inTech && !inLibrary && !inAllison && !inKellogg){
+            location = "Norris"
+            }
         
         query.whereKey("Name", equalTo:location)
+        query.whereKey("John", equalTo:false)
         var objects :[PFObject] = []
+        /*
         var selected :String!
-        do{
+        if !player{
             objects = try query.findObjects() as [PFObject]
             let randomNumber = arc4random_uniform(UInt32(objects.count))
             let another = objects[Int(randomNumber)] as PFObject?
@@ -183,11 +191,49 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
                 player.play()
             }
             
+        }catch{
+            print("error")
+        }
+        
+    }*/
+        var selected :String!
+        do{
+            objects = try query.findObjects() as [PFObject]
+            //let randomNumber = arc4random_uniform(UInt32(objects.count))
+            //let randomNumer = cnt
+            //let another = objects[Int(randomNumber)] as PFObject?
+            //print(randomNumber)
+            
+            //let record = another!["records"] as! PFFile
+            //print(record.url)
+            var playerQueue :[AVPlayerItem] = []
+            
+            //selected = record.url
+            //print("selected:")
+            //print(selected)
+            for object in objects{
+                let record = object["records"] as! PFFile
+                let thisRecord = record.url
+                let playerItem = AVPlayerItem( URL:NSURL( string: thisRecord! )! )
+                playerQueue.append(playerItem)
+            }
+            queuePlayer = AVQueuePlayer(items: playerQueue)
+            
+                
+                if stopped == false{
+                    queuePlayer.volume = 1.0
+                    queuePlayer.rate = 1.0
+                    queuePlayer.play()
+                
+                }
+            
+            
             
         }catch{
             print(error)
         }
         
+        }
     }
     
     
@@ -200,6 +246,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         self.beacons = delegate.beacons
         print("getting beacons ")
         
+        //self.inNorris = delegate.inNorris
         if let beaconStrings = self.beacons as? [String] {
             print(beaconStrings)
             for beacon in beaconStrings {
@@ -207,14 +254,14 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
                 print(beacon)
                 if beacon.rangeOfString("CF1A5302") != nil{
                     print("find beacon in norris")
-                    inNorris = true
+                    //inNorris = true
                 }
                 
             }
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView", name: "updateBeaconTableView", object: nil)
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
         
         
         let query = PFQuery(className: "Buyers")
@@ -234,6 +281,9 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         }
         if (inKellogg){
             location = "Kellogg"
+        }
+        if(!inNorris && !inTech && !inLibrary && !inAllison && !inKellogg){
+            location = "Norris"
         }
         
         query.whereKey("Name", equalTo:location)
@@ -263,8 +313,6 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         }catch{
             print(error)
         }
-        
-        
         
         
         //let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -313,7 +361,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         marker3.position = CLLocationCoordinate2DMake(42.054080, -87.676642)
         marker3.title = "Kellogg"
         marker3.map = mapView
-        marker3.icon = UIImage(named:"kellogg.png")
+        marker3.icon = UIImage(named:"kellogg-2.png")
         
         let marker4 = GMSMarker()
         marker4.position = CLLocationCoordinate2DMake(42.050598, -87.678136)
@@ -336,16 +384,17 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         self.beaconManager.startRangingBeaconsInRegion(self.beaconRegion)
         
         
-        //let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        //let inNorris = delegate.inNorris
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let inNorris = delegate.inNorris
         
         if (inNorris){
             topLabel.text = "Norris Student Center"
+            
             bottomView.hidden = false
             enterRegion.hidden = false
             enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
         }
-        
+
         if (inTech){
             topLabel.text = "Tech Institute"
         }
@@ -365,7 +414,6 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             bottomView.hidden = true
         }
         /*
-        
         if(inAllison || inKellogg || inTech || inLibrary || inNorris){
             
             if (inAllison) {

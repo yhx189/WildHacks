@@ -17,7 +17,7 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
     @IBOutlet var countingLabel: UILabel!
     
     func updateCounter() {
-        countingLabel.text = String(counter++)
+        countingLabel.text = String(format: "00:00:%02d", counter++)
     }
     
     
@@ -35,8 +35,8 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
             audioRecorder?.stop()
             let alert = UIAlertController(title: "Done!", message: "Give your post a name:", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-                // textField.placeholder = "Enter story name"
-                textField.text = "Enter story name"
+                textField.placeholder = "Name your audio"
+                //textField.text = "Norris"
             })
             alert.addAction(UIAlertAction(title: "Post", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction!) -> Void in
                 let dataToUpload : NSData = NSData(contentsOfURL: (self.audioRecorder?.url)!)!

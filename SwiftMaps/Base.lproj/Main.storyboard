@@ -17,22 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap to record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsJ-Jz-LE2">
-                                <rect key="frame" x="128" y="407" width="158" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Button to Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsJ-Jz-LE2">
+                                <rect key="frame" x="109" y="407" width="197" height="26"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" red="1" green="0.3149179245" blue="0.17323586699999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not started yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peB-mR-pOW">
-                                <rect key="frame" x="145" y="72" width="125" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peB-mR-pOW">
+                                <rect key="frame" x="58" y="92" width="299" height="109"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="65"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fR-dm-ZbE">
-                                <rect key="frame" x="120" y="177" width="175" height="175"/>
+                                <rect key="frame" x="116" y="196" width="175" height="175"/>
                                 <animations/>
                                 <state key="normal" image="record button.png">
                                     <color key="titleColor" red="1" green="0.3149179245" blue="0.17323586699999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,12 +42,14 @@
                                     <action selector="recordAudio:" destination="RkJ-s3-zSb" eventType="touchUpInside" id="EFM-9X-4Zt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5R-Cc-7F6">
-                                <rect key="frame" x="9" y="20" width="54" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5R-Cc-7F6">
+                                <rect key="frame" x="0.0" y="28" width="86" height="41"/>
                                 <animations/>
-                                <state key="normal" title="&lt;Back">
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="&lt; Back">
                                     <color key="titleColor" red="1" green="0.3149179245" blue="0.17323586699999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="focused" title="&lt; Back"/>
                                 <connections>
                                     <segue destination="zaJ-jd-il0" kind="modal" id="qyk-3z-Gwl"/>
                                 </connections>
@@ -67,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipz-YF-k2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="553" y="512"/>
+            <point key="canvasLocation" x="571" y="522"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="GpV-hq-OkR">
@@ -81,16 +83,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="opening image fit text.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="llW-VQ-UyD">
-                                <rect key="frame" x="0.0" y="173" width="414" height="453"/>
-                                <animations/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yours truly logo (1).png" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-0L-W7r">
-                                <rect key="frame" x="87" y="20" width="240" height="128"/>
-                                <animations/>
-                            </imageView>
                             <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CS-5i-S9Y">
-                                <rect key="frame" x="114" y="651" width="198" height="65"/>
+                                <rect key="frame" x="132" y="656" width="151" height="65"/>
                                 <animations/>
                                 <state key="normal" image="begin tour.png" backgroundImage="begin tour.png">
                                     <color key="titleColor" red="1" green="0.3149179245" blue="0.17323586699999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -99,6 +93,10 @@
                                     <segue destination="zaJ-jd-il0" kind="modal" id="SU0-dw-F4u"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="opening image overlay.png" translatesAutoresizingMaskIntoConstraints="NO" id="CIG-Cu-bV4">
+                                <rect key="frame" x="0.0" y="45" width="414" height="611"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,41 +120,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="onl-1E-Iae" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="67" width="414" height="594.5"/>
+                                <rect key="frame" x="0.0" y="64.5" width="414" height="594.5"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-ok-j0r">
+                                <rect key="frame" x="87" y="226" width="240" height="285"/>
                                 <subviews>
-                                    <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXr-3W-ddo">
-                                        <rect key="frame" x="87" y="210" width="240" height="128"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJI-Ge-rke">
-                                                <rect key="frame" x="97" y="17" width="44" height="21"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEZ-Qt-Qab">
-                                                <rect key="frame" x="94" y="79" width="49" height="30"/>
-                                                <animations/>
-                                                <state key="normal" title="Record"/>
-                                            </button>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-ok-j0r">
-                                                <rect key="frame" x="-1" y="-40" width="240" height="285"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-uc-cqW">
-                                                        <rect key="frame" x="99" y="132" width="42" height="21"/>
-                                                        <animations/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <animations/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-uc-cqW">
+                                        <rect key="frame" x="99" y="132" width="42" height="21"/>
                                         <animations/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.66811784351145043" colorSpace="calibratedRGB"/>
-                                    </view>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,20 +146,21 @@
                                 <color key="highlightedColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Northwestern University" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mx0-9b-hq1">
-                                <rect key="frame" x="114" y="20" width="186" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etm-u0-Eji">
-                                <rect key="frame" x="0.0" y="676" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="669.5" width="414" height="66.5"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-dg-pj9">
+                                        <rect key="frame" x="24" y="17" width="36" height="32"/>
+                                        <animations/>
+                                        <state key="normal" title="Button" image="pause.png"/>
+                                        <connections>
+                                            <action selector="stopAudio:" destination="zaJ-jd-il0" eventType="touchUpInside" id="LXq-2g-kiH"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Jj-YN-Tpa">
                                         <rect key="frame" x="292" y="0.0" width="122" height="66"/>
                                         <animations/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <state key="normal" title="Share Story">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -191,18 +169,17 @@
                                             <action selector="shareStory:" destination="zaJ-jd-il0" eventType="touchUpInside" id="M6x-du-mjD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-dg-pj9">
-                                        <rect key="frame" x="25" y="20" width="36" height="32"/>
-                                        <animations/>
-                                        <state key="normal" title="Button" image="pause.png"/>
-                                        <connections>
-                                            <action selector="stopAudio:" destination="zaJ-jd-il0" eventType="touchUpInside" id="LXq-2g-kiH"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Northwestern University" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mx0-9b-hq1">
+                                <rect key="frame" x="106" y="5" width="373" height="76"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -226,10 +203,9 @@
     </scenes>
     <resources>
         <image name="begin tour.png" width="308" height="151"/>
-        <image name="opening image fit text.jpg" width="1242" height="2208"/>
+        <image name="opening image overlay.png" width="1242" height="2208"/>
         <image name="pause.png" width="160" height="160"/>
         <image name="record button.png" width="300" height="300"/>
-        <image name="yours truly logo (1).png" width="977" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SU0-dw-F4u"/>

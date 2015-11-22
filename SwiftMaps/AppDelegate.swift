@@ -99,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager.startRangingBeaconsInRegion(beaconRegion3)
             locationManager.requestStateForRegion(beaconRegion3)
             
+            
         case .Denied:
             
             let alert = UIAlertController(title: "Warning", message: "You've disabled location update which is required for this app to work. Go to your phone settings and change the permissions.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -129,6 +130,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 text = "You have entered the region of Norris "
             }
             Notifications.display(text)
+            inNorris = true
+            print("inNorris:")
+            print(inNorris)
             
         case .Outside:
             
@@ -138,6 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 text = "You are out of the range of Norris"
             }
             Notifications.display(text)
+            inNorris = false
             
         }
     }
