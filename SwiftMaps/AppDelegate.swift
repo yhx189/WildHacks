@@ -78,7 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion){
         self.beacons = beacons
-        
+        print("sending beacons...")
+        //print(beacons)
         NSNotificationCenter.defaultCenter().postNotificationName("updateBeacon", object: self.beacons)
     }
     
@@ -149,29 +150,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
-            
+        
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-            
+        
     }
     
     func applicationWillTerminate(application: UIApplication) {
-            
+        
     }
 }
 class Notifications {
+    
+    class func display(text: String){
         
-        class func display(text: String){
-            
-            let notification: UILocalNotification = UILocalNotification()
-            notification.timeZone = NSTimeZone.defaultTimeZone()
-            
-            let dateTime = NSDate()
-            notification.fireDate = dateTime
-            notification.alertBody = text
-            UIApplication.sharedApplication().scheduleLocalNotification(notification)
-            
-        }
+        let notification: UILocalNotification = UILocalNotification()
+        notification.timeZone = NSTimeZone.defaultTimeZone()
         
+        let dateTime = NSDate()
+        notification.fireDate = dateTime
+        notification.alertBody = text
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
+    }
+    
 }

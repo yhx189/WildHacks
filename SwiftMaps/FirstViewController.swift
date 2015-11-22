@@ -1,16 +1,3 @@
-//import UIKit
-//import GoogleMaps
-//
-//class ViewController: UIViewController {
-//
-//  override func viewDidLoad() {
-//    super.viewDidLoad()
-//
-//    let mapView = self.view as! GMSMapView
-//    mapView.camera = GMSCameraPosition.cameraWithLatitude(-33.8600, longitude: 151.2094, zoom: 10)
-//  }
-//
-//}
 
 import UIKit
 import GoogleMaps
@@ -46,6 +33,11 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     var inTech  = false
     var inLibrary = false
     
+    @IBOutlet var enterRegion: UIView!
+    @IBOutlet var enterRegionContent: UILabel!
+    //@IBOutlet var thisTitle: UILabel!
+    //@IBOutlet var content: UILabel!
+    
     var stopped = false
     @IBOutlet var stopButton: UIButton!
     @IBAction func stopAudio(sender: AnyObject) {
@@ -64,7 +56,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     //@IBOutlet weak var enterRegion: UIView!
     @IBOutlet var shareStory: UIButton!
     var player :AVPlayer!
-  
+    
     //@IBOutlet weak var thisTitle: UILabel!
     //@IBOutlet weak var content: UILabel!
     
@@ -72,65 +64,65 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     @IBAction func shareStory(sender: AnyObject) {
         
         let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("RecordBoard"))! as UIViewController
+        stopped = true 
         
-
         popoverContent.modalPresentationStyle = .Popover
         //var popover = popoverContent.popoverPresentationController
         
         let popover = popoverContent.popoverPresentationController
-            
-            let viewForSource = sender as! UIView
-            popover!.sourceView = viewForSource
-            
-            // the position of the popover where it's showed
-            popover!.sourceRect = viewForSource.bounds
-            
-            // the size you want to display
-            popoverContent.preferredContentSize = CGSizeMake(200,500)
-            //popover.delegate = self
+        
+        let viewForSource = sender as! UIView
+        popover!.sourceView = viewForSource
+        
+        // the position of the popover where it's showed
+        popover!.sourceRect = viewForSource.bounds
+        
+        // the size you want to display
+        popoverContent.preferredContentSize = CGSizeMake(200,500)
+        //popover.delegate = self
         
         
         self.presentViewController(popoverContent, animated: true, completion: nil)
-
+        
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
-
+    
     /*
     let placesByBeacons = [
-        "538:38376": [
-            "Norris": 50, // read as: it's 50 meters from
-            // "Heavenly Sandwiches" to the beacon with
-            // major 6574 and minor 54631
-            "Tech": 150,
-            "Mini Panini": 325
-        ],
-        "648:12": [
-            "Heavenly Sandwiches": 250,
-            "Green & Green Salads": 100,
-            "Mini Panini": 20
-        ],
-        "17581:4351": [
-            "Heavenly Sandwiches": 350,
-            "Green & Green Salads": 500,
-            "Mini Panini": 170
-        ]
+    "538:38376": [
+    "Norris": 50, // read as: it's 50 meters from
+    // "Heavenly Sandwiches" to the beacon with
+    // major 6574 and minor 54631
+    "Tech": 150,
+    "Mini Panini": 325
+    ],
+    "648:12": [
+    "Heavenly Sandwiches": 250,
+    "Green & Green Salads": 100,
+    "Mini Panini": 20
+    ],
+    "17581:4351": [
+    "Heavenly Sandwiches": 350,
+    "Green & Green Salads": 500,
+    "Mini Panini": 170
+    ]
     ]
     func placesNearBeacon(beacon: CLBeacon) -> [String] {
-        let beaconKey = "\(beacon.major):\(beacon.minor)"
-        if let places = self.placesByBeacons[beaconKey] {
-            let sortedPlaces = Array(places).sort( { $0.1 < $1.1 }).map { $0.0 }
-            return sortedPlaces
-        }
-        return []
+    let beaconKey = "\(beacon.major):\(beacon.minor)"
+    if let places = self.placesByBeacons[beaconKey] {
+    let sortedPlaces = Array(places).sort( { $0.1 < $1.1 }).map { $0.0 }
+    return sortedPlaces
     }
-
+    return []
+    }
+    
     func updateView(note: NSNotification!){
-        beacons = note.object!
-        print("beacons:")
-        print(beacons)
+    beacons = note.object!
+    print("beacons:")
+    print(beacons)
     
     }
     
@@ -144,15 +136,31 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     print(places) // TODO: remove after implementing the UI
     }
     }
-
+    
     */
     func updateCounter() {
         print ("it is 5 seconds dude")
-
+        
         
         let query = PFQuery(className: "Buyers")
-        //query.selectKeys(["Name"])
-        query.whereKey("Name", equalTo:"Norris")
+        var location :String = ""
+        if (inNorris){
+            location = "Norris"
+        }
+        if (inTech){
+            location = "Tech"
+        }
+        if (inLibrary){
+            location = "Library"
+        }
+        if (inAllison){
+            location = "Allison"
+        }
+        if (inKellogg){
+            location = "Kellogg"
+        }
+        
+        query.whereKey("Name", equalTo:location)
         var objects :[PFObject] = []
         var selected :String!
         do{
@@ -170,7 +178,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             player = AVPlayer(playerItem:playerItem)
             //player.rate = 1.0;
             player.volume = 1.0
-            if stopped == true{
+            if stopped == false{
                 player.rate = 1.0
                 player.play()
             }
@@ -186,21 +194,56 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     override func viewDidLoad() {
         super.viewDidLoad()
         bottomView.hidden = true
-//        recordView.hidden = true
-        //enterRegion.hidden = true
-
+        //        recordView.hidden = true
+        enterRegion.hidden = true
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.beacons = delegate.beacons
+        print("getting beacons ")
+        
+        if let beaconStrings = self.beacons as? [String] {
+            print(beaconStrings)
+            for beacon in beaconStrings {
+                
+                print(beacon)
+                if beacon.rangeOfString("CF1A5302") != nil{
+                    print("find beacon in norris")
+                    inNorris = true
+                }
+                
+            }
+        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateView", name: "updateBeaconTableView", object: nil)
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target:self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
-      
+        
         
         let query = PFQuery(className: "Buyers")
         //query.selectKeys(["Name"])
-        query.whereKey("Name", equalTo:"Norris")
+        var location :String = ""
+        if (inNorris){
+            location = "Norris"
+        }
+        if (inTech){
+            location = "Tech"
+        }
+        if (inLibrary){
+            location = "Library"
+        }
+        if (inAllison){
+            location = "Allison"
+        }
+        if (inKellogg){
+            location = "Kellogg"
+        }
+        
+        query.whereKey("Name", equalTo:location)
+        query.whereKey("John", equalTo:true)
         var objects :[PFObject] = []
         var selected :String!
         do{
             objects = try query.findObjects() as [PFObject]
             let randomNumber = arc4random_uniform(UInt32(objects.count))
+            //let randomNumber = UInt32(objects.count)
             let another = objects[Int(randomNumber)] as PFObject?
             print(randomNumber)
             
@@ -208,7 +251,6 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             //print(record.url)
             selected = record.url
             
-            //selected = "http://files.parsetfss.com/292b6f11-5fee-4be7-b317-16fd494dfa3d/tfss-ccc3a843-967b-4773-b92e-1cf2e8f3c1c6-testfile.wav"
             print("selected:")
             print(selected)
             let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
@@ -222,18 +264,18 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             print(error)
         }
         
-
         
         
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let inNorris = delegate.inNorris
+        
+        //let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
         beacons = delegate.beacons
         
         print(beacons)
         
         print ("are you in range??")
         print(inNorris)
-
+        
         
         let fontSize = self.topLabel.font.pointSize;
         self.topLabel.font = UIFont(name: "Coolvetica", size: fontSize)
@@ -288,40 +330,42 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         
     }
     
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.beaconManager.startRangingBeaconsInRegion(self.beaconRegion)
         
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.beacons = delegate.beacons
-        if let beaconStrings = self.beacons as? [String] {
-            for beacon in beaconStrings {
-                print(beacon)
-                if beacon.rangeOfString("CF1A5302") != nil{
-                    print("find beacon in norris")
-                    inNorris = true
-                }
-                
-            }
-        }
-
+        
         //let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         //let inNorris = delegate.inNorris
-
+        
         if (inNorris){
             topLabel.text = "Norris Student Center"
+            bottomView.hidden = false
+            enterRegion.hidden = false
+            enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
         }
-        //let inTech = false
-        //let inAllison = false
-        //let inKellogg = false
-        //let inLibrary = false
-        if(inNorris){
+        
+        if (inTech){
+            topLabel.text = "Tech Institute"
+        }
+        if (inLibrary){
+            topLabel.text = "University library"
+        }
+        if (inAllison){
+            topLabel.text = "Allison Hall"
+        }
+        if (inKellogg){
+            topLabel.text = "Kellogg Center"
+        }
+        
+        if(inAllison || inKellogg || inTech || inLibrary || inNorris){
             bottomView.hidden = false
         } else {
             bottomView.hidden = true
         }
         /*
+        
         if(inAllison || inKellogg || inTech || inLibrary || inNorris){
             
             if (inAllison) {
@@ -350,11 +394,12 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
                 enterRegion.hidden = false
                 thisTitle.text = "Norris"
                 content.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
+                print(" IN NORRIS")
             }
         } else {
             enterRegion.hidden = true
         }
-*/
+        */
     }
     
     override func viewDidDisappear(animated: Bool) {
