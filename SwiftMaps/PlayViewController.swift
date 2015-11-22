@@ -80,9 +80,6 @@ class PlayViewController: UIViewController , ESTBeaconManagerDelegate,AVAudioPla
             let record = another!["records"] as! PFFile
             //print(record.url)
             selected = record.url
-            
-            //selected = "http://files.parsetfss.com/292b6f11-5fee-4be7-b317-16fd494dfa3d/tfss-ccc3a843-967b-4773-b92e-1cf2e8f3c1c6-testfile.wav"
-            var myURL: String?
             print("selected:")
             print(selected)
             let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
@@ -120,7 +117,6 @@ class PlayViewController: UIViewController , ESTBeaconManagerDelegate,AVAudioPla
             selected = record.url
             
             //selected = "http://files.parsetfss.com/292b6f11-5fee-4be7-b317-16fd494dfa3d/tfss-ccc3a843-967b-4773-b92e-1cf2e8f3c1c6-testfile.wav"
-            var myURL: String?
             print("selected:")
             print(selected)
             let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )

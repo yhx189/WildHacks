@@ -27,6 +27,11 @@
 		779A0B0C1C00F8D100C3039D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779A0B0B1C00F8D100C3039D /* SecondViewController.swift */; };
 		779A0B0E1C010B4C00C3039D /* play.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B0D1C010B4C00C3039D /* play.jpg */; };
 		779A0B101C010D6F00C3039D /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779A0B0F1C010D6F00C3039D /* PlayViewController.swift */; };
+		779A0B5D1C016F2B00C3039D /* allison-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B591C016F2B00C3039D /* allison-2.png */; };
+		779A0B5E1C016F2B00C3039D /* kellogg.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B5A1C016F2B00C3039D /* kellogg.png */; };
+		779A0B5F1C016F2B00C3039D /* mian library-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B5B1C016F2B00C3039D /* mian library-2.png */; };
+		779A0B601C016F2B00C3039D /* norris (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B5C1C016F2B00C3039D /* norris (2).png */; };
+		779A0B621C016F9A00C3039D /* tech.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B611C016F9A00C3039D /* tech.png */; };
 		AA91B8F61A8AD9A500553B3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91B8F51A8AD9A500553B3B /* AppDelegate.swift */; };
 		AA91B8F81A8AD9A500553B3B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91B8F71A8AD9A500553B3B /* FirstViewController.swift */; };
 		AA91B8FB1A8AD9A500553B3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA91B8F91A8AD9A500553B3B /* Main.storyboard */; };
@@ -57,6 +62,11 @@
 		779A0B0B1C00F8D100C3039D /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		779A0B0D1C010B4C00C3039D /* play.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = play.jpg; sourceTree = "<group>"; };
 		779A0B0F1C010D6F00C3039D /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		779A0B591C016F2B00C3039D /* allison-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allison-2.png"; sourceTree = "<group>"; };
+		779A0B5A1C016F2B00C3039D /* kellogg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kellogg.png; sourceTree = "<group>"; };
+		779A0B5B1C016F2B00C3039D /* mian library-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mian library-2.png"; sourceTree = "<group>"; };
+		779A0B5C1C016F2B00C3039D /* norris (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "norris (2).png"; sourceTree = "<group>"; };
+		779A0B611C016F9A00C3039D /* tech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tech.png; sourceTree = "<group>"; };
 		AA91B8F01A8AD9A500553B3B /* SwiftMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA91B8F41A8AD9A500553B3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA91B8F51A8AD9A500553B3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,7 +150,12 @@
 				AA91B8F71A8AD9A500553B3B /* FirstViewController.swift */,
 				779A0B0B1C00F8D100C3039D /* SecondViewController.swift */,
 				779A0B0F1C010D6F00C3039D /* PlayViewController.swift */,
+				779A0B611C016F9A00C3039D /* tech.png */,
 				779A0B0D1C010B4C00C3039D /* play.jpg */,
+				779A0B591C016F2B00C3039D /* allison-2.png */,
+				779A0B5A1C016F2B00C3039D /* kellogg.png */,
+				779A0B5B1C016F2B00C3039D /* mian library-2.png */,
+				779A0B5C1C016F2B00C3039D /* norris (2).png */,
 				527171751C0144820050C412 /* mian library.png */,
 				5271717B1C0149AB0050C412 /* allison.png */,
 				779A0AED1C00F63A00C3039D /* Bolts.framework */,
@@ -233,9 +248,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA91B8FB1A8AD9A500553B3B /* Main.storyboard in Resources */,
+				779A0B621C016F9A00C3039D /* tech.png in Resources */,
+				779A0B5D1C016F2B00C3039D /* allison-2.png in Resources */,
 				779A0B0E1C010B4C00C3039D /* play.jpg in Resources */,
 				AA91B9001A8AD9A500553B3B /* LaunchScreen.xib in Resources */,
+				779A0B5E1C016F2B00C3039D /* kellogg.png in Resources */,
 				5271717C1C0149AB0050C412 /* allison.png in Resources */,
+				779A0B5F1C016F2B00C3039D /* mian library-2.png in Resources */,
+				779A0B601C016F2B00C3039D /* norris (2).png in Resources */,
 				527171771C0144820050C412 /* mian library.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
