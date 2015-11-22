@@ -19,16 +19,68 @@ import Parse
 
 
 
-class FirstViewController: UIViewController ,CLLocationManagerDelegate{
-    
+class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaconManagerDelegate{
+
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var topLabel: UILabel!
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
+    let beaconManager = ESTBeaconManager()
+    let beaconRegion = CLBeaconRegion(
+        proximityUUID: NSUUID(UUIDString: "CF1A5302-EEBB-5C4F-AA18-851A36494C3D")!,
+        identifier: "ranged region")
+
+    let placesByBeacons = [
+        "538:38376": [
+            "Norris": 50, // read as: it's 50 meters from
+            // "Heavenly Sandwiches" to the beacon with
+            // major 6574 and minor 54631
+            "Tech": 150,
+            "Mini Panini": 325
+        ],
+        "648:12": [
+            "Heavenly Sandwiches": 250,
+            "Green & Green Salads": 100,
+            "Mini Panini": 20
+        ],
+        "17581:4351": [
+            "Heavenly Sandwiches": 350,
+            "Green & Green Salads": 500,
+            "Mini Panini": 170
+        ]
+    ]
+    func placesNearBeacon(beacon: CLBeacon) -> [String] {
+        let beaconKey = "\(beacon.major):\(beacon.minor)"
+        if let places = self.placesByBeacons[beaconKey] {
+            let sortedPlaces = Array(places).sort( { $0.1 < $1.1 }).map { $0.0 }
+            return sortedPlaces
+        }
+        return []
+    }
+    func beaconManager(manager: AnyObject!,  beacons: [AnyObject]!,
+        inRegion region: CLBeaconRegion!) {
+            if let nearestBeacon = beacons.first as? CLBeacon {
+                let places = placesNearBeacon(nearestBeacon)
+                // TODO: update the UI here
+                
+                
+                print(places) // TODO: remove after implementing the UI
+            }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let inRange = delegate.inNorris
+        
+        print ("are you in range??")
+        print(inNorris)
+        
+        
+        self.beaconManager.delegate = self
+        self.beaconManager.requestAlwaysAuthorization()
         
         let camera = GMSCameraPosition.cameraWithLatitude(42.055984,
             longitude: -87.675171, zoom: 15.5)
@@ -77,10 +129,16 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate{
         
     }
     
+
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        self.beaconManager.startRangingBeaconsInRegion(self.beaconRegion)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.beaconManager.stopRangingBeaconsInRegion(self.beaconRegion)
+    }
     
     
 }

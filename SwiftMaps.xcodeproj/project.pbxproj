@@ -32,6 +32,7 @@
 		779A0B5F1C016F2B00C3039D /* mian library-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B5B1C016F2B00C3039D /* mian library-2.png */; };
 		779A0B601C016F2B00C3039D /* norris (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B5C1C016F2B00C3039D /* norris (2).png */; };
 		779A0B621C016F9A00C3039D /* tech.png in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B611C016F9A00C3039D /* tech.png */; };
+		779A0B641C017DEF00C3039D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779A0B631C017DEF00C3039D /* Images.xcassets */; };
 		AA91B8F61A8AD9A500553B3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91B8F51A8AD9A500553B3B /* AppDelegate.swift */; };
 		AA91B8F81A8AD9A500553B3B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91B8F71A8AD9A500553B3B /* FirstViewController.swift */; };
 		AA91B8FB1A8AD9A500553B3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA91B8F91A8AD9A500553B3B /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 		779A0B5B1C016F2B00C3039D /* mian library-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mian library-2.png"; sourceTree = "<group>"; };
 		779A0B5C1C016F2B00C3039D /* norris (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "norris (2).png"; sourceTree = "<group>"; };
 		779A0B611C016F9A00C3039D /* tech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tech.png; sourceTree = "<group>"; };
+		779A0B631C017DEF00C3039D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA91B8F01A8AD9A500553B3B /* SwiftMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA91B8F41A8AD9A500553B3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA91B8F51A8AD9A500553B3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				779A0AEF1C00F64100C3039D /* Parse.framework */,
 				AA91B8F91A8AD9A500553B3B /* Main.storyboard */,
 				AA91B8FE1A8AD9A500553B3B /* LaunchScreen.xib */,
+				779A0B631C017DEF00C3039D /* Images.xcassets */,
 				AA91B8F31A8AD9A500553B3B /* Supporting Files */,
 			);
 			path = SwiftMaps;
@@ -251,6 +254,7 @@
 				779A0B621C016F9A00C3039D /* tech.png in Resources */,
 				779A0B5D1C016F2B00C3039D /* allison-2.png in Resources */,
 				779A0B0E1C010B4C00C3039D /* play.jpg in Resources */,
+				779A0B641C017DEF00C3039D /* Images.xcassets in Resources */,
 				AA91B9001A8AD9A500553B3B /* LaunchScreen.xib in Resources */,
 				779A0B5E1C016F2B00C3039D /* kellogg.png in Resources */,
 				5271717C1C0149AB0050C412 /* allison.png in Resources */,
@@ -431,6 +435,7 @@
 			baseConfigurationReference = FF81EE55CF87CE6057AB678E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -454,6 +459,7 @@
 			baseConfigurationReference = AF9B88F15DF013C78A8DF2AE /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
