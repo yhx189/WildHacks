@@ -16,9 +16,7 @@ import AVFoundation
 
 class PlayViewController: UIViewController , ESTBeaconManagerDelegate,AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
-    @IBOutlet var tableView: UITableView!
-    
-    @IBOutlet var distance: UILabel!
+
     var allRecords: [String] = []
     var audioPlayer: AVAudioPlayer?
     

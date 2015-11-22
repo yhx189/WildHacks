@@ -25,29 +25,37 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
-   
-    
-    
     @IBOutlet weak var topLabel: UILabel!
+    
+    
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
     let beaconManager = ESTBeaconManager()
     let beaconRegion = CLBeaconRegion(
         proximityUUID: NSUUID(UUIDString: "CF1A5302-EEBB-5C4F-AA18-851A36494C3D")!,
         identifier: "ranged region")
+    
+    
     var beacons : AnyObject = []
     var timer = NSTimer()
     var popover: UIPopoverController? = nil
+    
+    var inNorris = true
+    var inAllison = false
+    var inKellogg = false
+    var inTech  = false
+    var inLibrary = false
+    
     var stopped = false
     @IBOutlet var stopButton: UIButton!
     @IBAction func stopAudio(sender: AnyObject) {
         
         if stopped == false{
-            player.pause()
+            player.rate = 0.0
             stopButton.setImage(UIImage(named: "restart.png"), forState: UIControlState.Normal)
             stopped = true
         } else{
-            player.play()
+            player.rate = 1.0
             stopButton.setImage(UIImage(named: "pause.png"), forState: UIControlState.Normal)
             stopped = false
         }
@@ -59,7 +67,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
   
     //@IBOutlet weak var thisTitle: UILabel!
     //@IBOutlet weak var content: UILabel!
-   
+    
     
     @IBAction func shareStory(sender: AnyObject) {
         
@@ -90,7 +98,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         return .None
     }
 
-    
+    /*
     let placesByBeacons = [
         "538:38376": [
             "Norris": 50, // read as: it's 50 meters from
@@ -118,19 +126,30 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         }
         return []
     }
+
     func updateView(note: NSNotification!){
         beacons = note.object!
         print("beacons:")
         print(beacons)
+    
     }
     
+    func beaconManager(manager: AnyObject!,  beacons: [AnyObject]!,
+    inRegion region: CLBeaconRegion!) {
+    if let nearestBeacon = beacons.first as? CLBeacon {
+    let places = placesNearBeacon(nearestBeacon)
+    // TODO: update the UI here
+    
+    
+    print(places) // TODO: remove after implementing the UI
+    }
+    }
+
+    */
     func updateCounter() {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         print ("it is 5 seconds dude")
-        beacons = delegate.beacons
+
         
-        print(beacons)
-        print ("it is 5 seconds dude")
         let query = PFQuery(className: "Buyers")
         //query.selectKeys(["Name"])
         query.whereKey("Name", equalTo:"Norris")
@@ -151,7 +170,10 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             player = AVPlayer(playerItem:playerItem)
             //player.rate = 1.0;
             player.volume = 1.0
-            player.play()
+            if stopped == true{
+                player.rate = 1.0
+                player.play()
+            }
             
             
         }catch{
@@ -160,17 +182,6 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         
     }
     
-
-    func beaconManager(manager: AnyObject!,  beacons: [AnyObject]!,
-        inRegion region: CLBeaconRegion!) {
-            if let nearestBeacon = beacons.first as? CLBeacon {
-                let places = placesNearBeacon(nearestBeacon)
-                // TODO: update the UI here
-                
-                
-                print(places) // TODO: remove after implementing the UI
-            }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -283,7 +294,20 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         self.beaconManager.startRangingBeaconsInRegion(self.beaconRegion)
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let inNorris = delegate.inNorris
+        self.beacons = delegate.beacons
+        if let beaconStrings = self.beacons as? [String] {
+            for beacon in beaconStrings {
+                print(beacon)
+                if beacon.rangeOfString("CF1A5302") != nil{
+                    print("find beacon in norris")
+                    inNorris = true
+                }
+                
+            }
+        }
+
+        //let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        //let inNorris = delegate.inNorris
 
         if (inNorris){
             topLabel.text = "Norris Student Center"
