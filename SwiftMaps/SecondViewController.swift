@@ -45,6 +45,7 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
                 
                 let buyers = PFObject(className: "Buyers")
                 buyers["Name"] = "Norris"
+                buyers["John"] = false
                 buyers["records"] = soundFile
                 buyers.saveInBackground()
             }))

@@ -44,11 +44,18 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     @IBAction func stopAudio(sender: AnyObject) {
         
         if stopped == false{
-            player.rate = 0.0
+            
+            player.rate = 1.0
+            if counter>=5{
+            queuePlayer.rate = 1.0
+            }
             stopButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
             stopped = true
         } else{
-            player.rate = 1.0
+            player.rate = 0.0
+            if(counter>=5){
+            queuePlayer.rate = 0.0
+            }
             stopButton.setImage(UIImage(named: "pause.png"), forState: UIControlState.Normal)
             stopped = false
         }
@@ -141,63 +148,45 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     */
     func updateCounter() {
         
-        print ("it is 5 seconds dude")
-        counter++
-        if counter == 5{
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let inNorris = delegate.inNorris
+        if stopped == false && counter < 5{
+            counter++
+            print(counter)
+        }
+        
+       
+        if counter == 5 {
+            print ("it is 5 seconds dude")
+            cnt = 1
             timer.invalidate()
             let query = PFQuery(className: "Buyers")
-        var location :String = ""
-        if (inNorris){
-            location = "Norris"
-        }
-        if (inTech){
-            location = "Tech"
-        }
-        if (inLibrary){
-            location = "Library"
-        }
-        if (inAllison){
-            location = "Allison"
-        }
-        if (inKellogg){
-            location = "Kellogg"
-        }
-        if(!inNorris && !inTech && !inLibrary && !inAllison && !inKellogg){
-            location = "Norris"
+            var location :String = ""
+            if (inNorris){
+                location = "Norris"
+            }
+            if (inTech){
+                location = "Tech"
+            }
+            if (inLibrary){
+                location = "Library"
+            }
+            if (inAllison){
+                location = "Allison"
+            }
+            if (inKellogg){
+                location = "Kellogg"
+            }
+            if(!inNorris && !inTech && !inLibrary && !inAllison && !inKellogg){
+                location = "Norris"
             }
         
-        query.whereKey("Name", equalTo:location)
-        query.whereKey("John", equalTo:false)
-        var objects :[PFObject] = []
-        /*
-        var selected :String!
-        if !player{
-            objects = try query.findObjects() as [PFObject]
-            let randomNumber = arc4random_uniform(UInt32(objects.count))
-            let another = objects[Int(randomNumber)] as PFObject?
-            print(randomNumber)
-            
-            let record = another!["records"] as! PFFile
-            //print(record.url)
-            selected = record.url
-            print("selected:")
-            print(selected)
-            let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
-            player = AVPlayer(playerItem:playerItem)
-            //player.rate = 1.0;
-            player.volume = 1.0
-            if stopped == false{
-                player.rate = 1.0
-                player.play()
-            }
-            
-        }catch{
-            print("error")
-        }
+            query.whereKey("Name", equalTo:location)
+            query.whereKey("John", equalTo:false)
+            var objects :[PFObject] = []
         
-    }*/
-        var selected :String!
-        do{
+           
+            do{
             objects = try query.findObjects() as [PFObject]
             //let randomNumber = arc4random_uniform(UInt32(objects.count))
             //let randomNumer = cnt
@@ -226,12 +215,13 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
                     queuePlayer.play()
                 
                 }
+              
             
             
             
-        }catch{
-            print(error)
-        }
+            }catch{
+                print(error)
+            }
         
         }
     }
@@ -239,7 +229,13 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bottomView.hidden = true
+        if (inNorris){
+            topLabel.text = "Norris Student Center"
+            
+            bottomView.hidden = false
+        }
+
+        //bottomView.hidden = true
         //        recordView.hidden = true
         enterRegion.hidden = true
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -305,10 +301,11 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             print(selected)
             let playerItem = AVPlayerItem( URL:NSURL( string: selected )! )
             player = AVPlayer(playerItem:playerItem)
-            //player.rate = 1.0;
-            player.volume = 1.0
-            player.play()
-            
+            if stopped == false{
+                player.rate = 1.0;
+                player.volume = 1.0
+                player.play()
+            }
             
         }catch{
             print(error)
@@ -331,8 +328,8 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
         
-        let camera = GMSCameraPosition.cameraWithLatitude(42.055984,
-            longitude: -87.675171, zoom: 15.5)
+        let camera = GMSCameraPosition.cameraWithLatitude(42.053701,
+            longitude: -87.672569, zoom: 16.5)
         if camera != nil{
             mapView.camera = camera
         }
@@ -385,8 +382,8 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let inNorris = delegate.inNorris
-        
+        inNorris = delegate.inNorris
+        inNorris = true
         if (inNorris){
             topLabel.text = "Norris Student Center"
             
