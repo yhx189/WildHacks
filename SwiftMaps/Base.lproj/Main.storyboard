@@ -83,8 +83,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="opening image fit text.png" translatesAutoresizingMaskIntoConstraints="NO" id="CIG-Cu-bV4">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <animations/>
+                            </imageView>
                             <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CS-5i-S9Y">
-                                <rect key="frame" x="132" y="656" width="151" height="65"/>
+                                <rect key="frame" x="132" y="508" width="151" height="65"/>
                                 <animations/>
                                 <state key="normal" image="begin tour.png" backgroundImage="begin tour.png">
                                     <color key="titleColor" red="1" green="0.3149179245" blue="0.17323586699999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -93,10 +97,6 @@
                                     <segue destination="zaJ-jd-il0" kind="modal" id="SU0-dw-F4u"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="opening image overlay.png" translatesAutoresizingMaskIntoConstraints="NO" id="CIG-Cu-bV4">
-                                <rect key="frame" x="0.0" y="45" width="414" height="611"/>
-                                <animations/>
-                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,7 +203,7 @@
     </scenes>
     <resources>
         <image name="begin tour.png" width="308" height="151"/>
-        <image name="opening image overlay.png" width="1242" height="2208"/>
+        <image name="opening image fit text.png" width="1242" height="2208"/>
         <image name="pause.png" width="160" height="160"/>
         <image name="record button.png" width="300" height="300"/>
     </resources>

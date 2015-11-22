@@ -246,7 +246,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         self.beacons = delegate.beacons
         print("getting beacons ")
         
-        //self.inNorris = delegate.inNorris
+        self.inNorris = delegate.inNorris
         if let beaconStrings = self.beacons as? [String] {
             print(beaconStrings)
             for beacon in beaconStrings {
@@ -391,9 +391,14 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             topLabel.text = "Norris Student Center"
             
             bottomView.hidden = false
-            enterRegion.hidden = false
-            enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
         }
+//            enterRegion.hidden = false
+//            
+//            enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
+//            enterRegionContent.numberOfLines = 3
+//            enterRegionContent.preferredMaxLayoutWidth = 500
+//            enterRegionContent.lineBreakMode = NSLineBreakMode.ByWordWrapping
+//        }
 
         if (inTech){
             topLabel.text = "Tech Institute"
