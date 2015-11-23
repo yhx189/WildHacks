@@ -47,14 +47,14 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             
             player.rate = 1.0
             if counter>=5{
-            queuePlayer.rate = 1.0
+                queuePlayer.rate = 1.0
             }
             stopButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
             stopped = true
         } else{
             player.rate = 0.0
             if(counter>=5){
-            queuePlayer.rate = 0.0
+                queuePlayer.rate = 0.0
             }
             stopButton.setImage(UIImage(named: "pause.png"), forState: UIControlState.Normal)
             stopped = false
@@ -72,7 +72,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     @IBAction func shareStory(sender: AnyObject) {
         
         let popoverContent = (self.storyboard?.instantiateViewControllerWithIdentifier("RecordBoard"))! as UIViewController
-        stopped = true 
+        stopped = true
         
         popoverContent.modalPresentationStyle = .Popover
         //var popover = popoverContent.popoverPresentationController
@@ -155,7 +155,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             print(counter)
         }
         
-       
+        
         if counter == 5 {
             print ("it is 5 seconds dude")
             cnt = 1
@@ -180,49 +180,49 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             if(!inNorris && !inTech && !inLibrary && !inAllison && !inKellogg){
                 location = "Norris"
             }
-        
+            
             query.whereKey("Name", equalTo:location)
             query.whereKey("John", equalTo:false)
             var objects :[PFObject] = []
-        
-           
+            
+            
             do{
-            objects = try query.findObjects() as [PFObject]
-            //let randomNumber = arc4random_uniform(UInt32(objects.count))
-            //let randomNumer = cnt
-            //let another = objects[Int(randomNumber)] as PFObject?
-            //print(randomNumber)
-            
-            //let record = another!["records"] as! PFFile
-            //print(record.url)
-            var playerQueue :[AVPlayerItem] = []
-            
-            //selected = record.url
-            //print("selected:")
-            //print(selected)
-            for object in objects{
-                let record = object["records"] as! PFFile
-                let thisRecord = record.url
-                let playerItem = AVPlayerItem( URL:NSURL( string: thisRecord! )! )
-                playerQueue.append(playerItem)
-            }
-            queuePlayer = AVQueuePlayer(items: playerQueue)
-            
+                objects = try query.findObjects() as [PFObject]
+                //let randomNumber = arc4random_uniform(UInt32(objects.count))
+                //let randomNumer = cnt
+                //let another = objects[Int(randomNumber)] as PFObject?
+                //print(randomNumber)
+                
+                //let record = another!["records"] as! PFFile
+                //print(record.url)
+                var playerQueue :[AVPlayerItem] = []
+                
+                //selected = record.url
+                //print("selected:")
+                //print(selected)
+                for object in objects{
+                    let record = object["records"] as! PFFile
+                    let thisRecord = record.url
+                    let playerItem = AVPlayerItem( URL:NSURL( string: thisRecord! )! )
+                    playerQueue.append(playerItem)
+                }
+                queuePlayer = AVQueuePlayer(items: playerQueue)
+                
                 
                 if stopped == false{
                     queuePlayer.volume = 1.0
                     queuePlayer.rate = 1.0
                     queuePlayer.play()
-                
+                    
                 }
-              
-            
-            
-            
+                
+                
+                
+                
             }catch{
                 print(error)
             }
-        
+            
         }
     }
     
@@ -234,7 +234,7 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             
             bottomView.hidden = false
         }
-
+        
         //bottomView.hidden = true
         //        recordView.hidden = true
         enterRegion.hidden = true
@@ -389,14 +389,14 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
             
             bottomView.hidden = false
         }
-//            enterRegion.hidden = false
-//            
-//            enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
-//            enterRegionContent.numberOfLines = 3
-//            enterRegionContent.preferredMaxLayoutWidth = 500
-//            enterRegionContent.lineBreakMode = NSLineBreakMode.ByWordWrapping
-//        }
-
+        //            enterRegion.hidden = false
+        //
+        //            enterRegionContent.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
+        //            enterRegionContent.numberOfLines = 3
+        //            enterRegionContent.preferredMaxLayoutWidth = 500
+        //            enterRegionContent.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        //        }
+        
         if (inTech){
             topLabel.text = "Tech Institute"
         }
@@ -417,37 +417,37 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
         }
         /*
         if(inAllison || inKellogg || inTech || inLibrary || inNorris){
-            
-            if (inAllison) {
-                enterRegion.hidden = false
-                thisTitle.text = "Allison Residential Hall"
-                content.text = "Allsion res hall is considered one of the best on campus. It houses 300+ students and also includes a dinning hall. From burgers to pasta to ethnic food, there’s a different option every day. Also features a kosher and vegan bar."
-            }
-            if(inKellogg) {
-                enterRegion.hidden = false
-                thisTitle.text = "Kellogg School of Management"
-                content.text = "The Kellogg building is the headquarters of the Kellogg School of Business. Many business or econ classes are offered there, along with a lot of graduate classes."
-            }
-            if(inTech){
-                enterRegion.hidden = false
-                thisTitle.text = "Technological Institute"
-                content.text = "Tech is home to many science and engineering classes. Some people even turn classrooms into study rooms when they’re not being used."
-            }
-            if(inLibrary){
-                enterRegion.hidden = false
-                thisTitle.text = "University Library"
-                content.text = "The University Library is the largest library on campus, and a great quiet spot to study. You can often find students passed out in the study carrels at 3AM during finals week."
-            }
-            
-            
-            if(inNorris){
-                enterRegion.hidden = false
-                thisTitle.text = "Norris"
-                content.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
-                print(" IN NORRIS")
-            }
+        
+        if (inAllison) {
+        enterRegion.hidden = false
+        thisTitle.text = "Allison Residential Hall"
+        content.text = "Allsion res hall is considered one of the best on campus. It houses 300+ students and also includes a dinning hall. From burgers to pasta to ethnic food, there’s a different option every day. Also features a kosher and vegan bar."
+        }
+        if(inKellogg) {
+        enterRegion.hidden = false
+        thisTitle.text = "Kellogg School of Management"
+        content.text = "The Kellogg building is the headquarters of the Kellogg School of Business. Many business or econ classes are offered there, along with a lot of graduate classes."
+        }
+        if(inTech){
+        enterRegion.hidden = false
+        thisTitle.text = "Technological Institute"
+        content.text = "Tech is home to many science and engineering classes. Some people even turn classrooms into study rooms when they’re not being used."
+        }
+        if(inLibrary){
+        enterRegion.hidden = false
+        thisTitle.text = "University Library"
+        content.text = "The University Library is the largest library on campus, and a great quiet spot to study. You can often find students passed out in the study carrels at 3AM during finals week."
+        }
+        
+        
+        if(inNorris){
+        enterRegion.hidden = false
+        thisTitle.text = "Norris"
+        content.text = "Norris University Center is the student center where a lot of events are held. Come do art projects in Artica, hang out in the game room, or get your NU swag downstairs in the bookstore."
+        print(" IN NORRIS")
+        }
         } else {
-            enterRegion.hidden = true
+        enterRegion.hidden = true
         }
         */
     }
@@ -459,4 +459,3 @@ class FirstViewController: UIViewController ,CLLocationManagerDelegate, ESTBeaco
     
     
 }
-

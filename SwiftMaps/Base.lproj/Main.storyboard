@@ -126,15 +126,6 @@
                             </view>
                             <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-ok-j0r">
                                 <rect key="frame" x="87" y="226" width="240" height="285"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJB-uc-cqW">
-                                        <rect key="frame" x="99" y="132" width="42" height="21"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -189,7 +180,6 @@
                     <connections>
                         <outlet property="bottomView" destination="etm-u0-Eji" id="VzG-vl-RyA"/>
                         <outlet property="enterRegion" destination="ciw-ok-j0r" id="d9K-Cr-weZ"/>
-                        <outlet property="enterRegionContent" destination="wJB-uc-cqW" id="bmo-xu-kbY"/>
                         <outlet property="mapView" destination="onl-1E-Iae" id="GeV-Uu-WUH"/>
                         <outlet property="shareStory" destination="1Jj-YN-Tpa" id="uyT-NL-eA9"/>
                         <outlet property="stopButton" destination="RJW-dg-pj9" id="hfg-va-4Cg"/>

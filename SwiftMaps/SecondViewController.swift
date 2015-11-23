@@ -41,13 +41,14 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
             alert.addAction(UIAlertAction(title: "Post", style: UIAlertActionStyle.Cancel, handler: { (action:UIAlertAction!) -> Void in
                 let dataToUpload : NSData = NSData(contentsOfURL: (self.audioRecorder?.url)!)!
                 let textField = alert.textFields![0] as UITextField
-                let soundFile = PFFile(name: "\(textField.text)", data: dataToUpload)
+                let soundFile = PFFile(name: "audio.wav", data: dataToUpload)
                 
                 let buyers = PFObject(className: "Buyers")
-                buyers["Name"] = "Norris"
+                buyers["Name"] = "Norris" //textField.text
                 buyers["John"] = false
                 buyers["records"] = soundFile
                 buyers.saveInBackground()
+                print("saved")
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
@@ -86,7 +87,7 @@ class SecondViewController: UIViewController, AVAudioPlayerDelegate, AVAudioReco
         imagePlay = UIImage(named:"play.jpg")
         recordButton.setImage(imagePlay, forState: .Normal)
         
-        let soundFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("sound.cat")
+        let soundFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("sound.wav")
         //let docsDir = dirPaths[0]  //as! String
         //let soundFilePath =
         //  docsDir.URLByAppendingPathComponent("sound.caf")
